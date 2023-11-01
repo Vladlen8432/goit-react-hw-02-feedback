@@ -43,35 +43,29 @@ class App extends Component {
         positivePercentage={positivePercentage}
       />
     ) : (
-      <Notification message="There is no feedback"/>
+      <Notification message="There is no feedback" />
     );
 
     return (
-      <div>
+      <div className="containerFeedback">
         <FeedbackOptions
           options={feedbackOptions}
           onLeaveFeedback={this.handleFeedback}
         />
         {feedbackBlock}
 
-        {this.feedbackBlock > 0 &&<Statistics
-          good={good}
-          neutral={neutral}
-          bad={bad}
-          total={totalFeedback}
-          positivePercentage={positivePercentage}
-        />}
+        {this.feedbackBlock > 0 && (
+          <Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={totalFeedback}
+            positivePercentage={positivePercentage}
+          />
+        )}
       </div>
     );
   }
 }
 
 export default App;
-
-// export const App = () => {
-//   return (
-//     <div>
-
-//     </div>
-//   );
-// };
