@@ -54,13 +54,13 @@ class App extends Component {
         />
         {feedbackBlock}
 
-        <Statistics
+        {this.feedbackBlock > 0 &&<Statistics
           good={good}
           neutral={neutral}
           bad={bad}
           total={totalFeedback}
           positivePercentage={positivePercentage}
-        />
+        />}
       </div>
     );
   }
