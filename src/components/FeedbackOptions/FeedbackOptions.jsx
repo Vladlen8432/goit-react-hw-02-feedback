@@ -2,8 +2,6 @@ import css from './FeedbackOption.module.css';
 
 const FeedbackOptions = ({ options, onLeaveFeedback }) => (
   <div>
-    <h2 className={css.headerFeedback}>Please, leave feedback</h2>
-
     <div className={css.buttonContainer}>
       {options.map(option => (
         <button

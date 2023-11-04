@@ -2,19 +2,18 @@ import { Component } from 'react';
 import Statistics from './Statisctics/Statistics';
 import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
 import Notification from './Notification/Notification';
+import Section from './Section/Section';
 
 class App extends Component {
   state = {
     good: 0,
     neutral: 0,
     bad: 0,
-    hasFeedback: false,
   };
 
   handleFeedback = type => {
     this.setState(prevState => ({
       [type]: prevState[type] + 1,
-      hasFeedback: true,
     }));
   };
 
@@ -34,35 +33,35 @@ class App extends Component {
     const totalFeedback = this.countTotalFeedback();
     const positivePercentage = this.countPositiveFeedbackPercentage();
     const feedbackOptions = ['good', 'neutral', 'bad'];
-    const feedbackBlock = this.state.hasFeedback ? (
-      <Statistics
-        good={good}
-        neutral={neutral}
-        bad={bad}
-        total={totalFeedback}
-        positivePercentage={positivePercentage}
-      />
-    ) : (
-      <Notification message="There is no feedback" />
-    );
 
     return (
       <div className="containerFeedback">
-        <FeedbackOptions
-          options={feedbackOptions}
-          onLeaveFeedback={this.handleFeedback}
-        />
-        {feedbackBlock}
-
-        {this.feedbackBlock > 0 && (
-          <Statistics
-            good={good}
-            neutral={neutral}
-            bad={bad}
-            total={totalFeedback}
-            positivePercentage={positivePercentage}
+        <Section style={{ fontSize: '32px' }} title="Please, leave feedback">
+          <FeedbackOptions
+            options={feedbackOptions}
+            onLeaveFeedback={this.handleFeedback}
           />
-        )}
+        </Section>
+
+        <Section
+          title={
+            totalFeedback > 0 ? (
+              'Statistics'
+            ) : (
+              <Notification message="There is no feedback" />
+            )
+          }
+        >
+          {totalFeedback > 0 ? (
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={totalFeedback}
+              positivePercentage={positivePercentage}
+            />
+          ) : null}
+        </Section>
       </div>
     );
   }
